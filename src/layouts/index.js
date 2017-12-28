@@ -1,24 +1,46 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import Header from '../components/header';
-import Footer from '../components/footer';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
+import 'font-awesome/scss/font-awesome.scss'
 
-import '../../sass/style.scss';
+import Header from '../components/header'
+import MusicPlayer from '../components/music-player'
 
-const TemplateWrapper = ({ children }) => (
-  <div>
-    <Helmet
-      title="Gatsby React Boilerplate"
-    />
-    <Header />
-    {children()}
-    <Footer />
-  </div>
-);
+import '../../sass/style.scss'
+
+class TemplateWrapper extends React.Component {
+	constructor(props) {
+		super(props)
+		this.handleSearch = this.handleSearch.bind(this)
+
+		this.state = { search: '' }
+	}
+
+	handleSearch(value) {
+		this.setState({ search: value })
+	}
+
+	render() {
+		// const { children } = this.props
+
+		return (
+			<div>
+				<Helmet title="Ranchera">
+					<html lang="en" amp />
+					<meta name="description" content="Ranchera is a beautifully visualized music, videos and podcast player." />
+					<link rel="shortcut icon" href="favicon.png" type="image/png" />
+				</Helmet>
+
+				<Header handleSearch={this.handleSearch} />
+
+				<MusicPlayer searchValue={this.state.search} />
+			</div>
+		)
+	}
+}
 
 TemplateWrapper.propTypes = {
-  children: PropTypes.func,
-};
+	children: PropTypes.func,
+}
 
-export default TemplateWrapper;
+export default TemplateWrapper

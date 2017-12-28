@@ -1,9 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 const Icon = props => (
-  <svg viewBox={props.icon.viewBox} width={props.width} height={props.height} fill={props.fill}>
-    <use xlinkHref={`#${props.icon.id}`} />
-  </svg>
-);
+	<div>
+		<svg viewBox={props.icon.viewBox} width={props.width} height={props.height} fill={props.fill}>
+			<use xlinkHref={`#${props.icon.id}`} />
+		</svg>
+	</div>
+)
 
-export default Icon;
+export default Icon

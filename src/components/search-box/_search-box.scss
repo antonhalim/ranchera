@@ -1,0 +1,19 @@
+.search-box {
+	display: flex;
+	width: 800px;
+	padding: 0.5em;
+}
+
+.search-box INPUT {
+	width: 80%;
+	border: 1px solid gray;
+	border-radius: 4px;
+	padding-left: 0.5em;
+
+}
+.search-box BUTTON {
+	position: relative;
+	right: 36px;
+	border: none;
+	margin: auto 0;
+}
