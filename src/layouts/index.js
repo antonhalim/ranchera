@@ -43,4 +43,9 @@ TemplateWrapper.propTypes = {
 	children: PropTypes.func,
 }
 
+// Force HTTPS
+if (typeof window !== 'undefined' && window.location.protocol === 'http:' && process.env.NODE_ENV === 'production') {
+	window.location = 'https:' + window.location.href.substring(window.location.protocol.length)
+}
+
 export default TemplateWrapper
