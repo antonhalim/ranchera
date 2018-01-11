@@ -26,10 +26,11 @@ class Visualizer extends React.Component {
 	}
 
 	componentDidMount() {
-		this.width = this.container.offsetWidth
-		this.height = this.container.clientHeight
 		this.addBuble()
 		this.animateBuble()
+		this.handleResize()
+
+		window.onresize = this.handleResize.bind(this)
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -38,6 +39,11 @@ class Visualizer extends React.Component {
 
 	shouldComponentUpdate() {
 		return false
+	}
+
+	handleResize() {
+		this.width = this.container.offsetWidth
+		this.height = this.container.clientHeight
 	}
 
 	addBuble() {
