@@ -12,18 +12,9 @@ const style = {
 
 const randomBackground = randomColor({ luminosity: 'light', count: 27 })
 
-function getRandomInRange(min, max){
+function getRandomInRange(min, max) {
 	return Math.random() * (max - min) + min
 }
-function getRandomColor() {
-	var letters = '0123456789ABCDEF';
-	var color = '#';
-	for (var i = 0; i < 6; i++) {
-		color += letters[Math.floor(Math.random() * 16)];
-	}
-	return color;
-}
-
 
 class Visualizer extends React.Component {
 	constructor(props) {
@@ -45,17 +36,16 @@ class Visualizer extends React.Component {
 		this.setState({ playing: nextProps.searching.length > 0 })
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
+	shouldComponentUpdate() {
 		return false
 	}
 
 	addBuble() {
 		this.interval = setInterval(() => {
 			if (this.state.playing) {
-				let size = Math.round(Math.random() * 100)
-				let background = randomBackground[Math.round(getRandomInRange(0, 27))]
-				console.log(background)
-				let bublestyle = `left: ${getRandomInRange(0, this.width)}px; width: ${size}px; height: ${size}px; background: ${background};border-radius: 50%; bottom: 0; position: absolute;`
+				const size = Math.round(Math.random() * 100)
+				const background = randomBackground[Math.round(getRandomInRange(0, 27))]
+				const bublestyle = `left: ${getRandomInRange(0, this.width)}px; width: ${size}px; height: ${size}px; background: ${background};border-radius: 50%; bottom: 0; position: absolute;`
 				$(this.container).append(`<div class='buble' style="${bublestyle}"><span class='new' /></div>`)
 			}
 			this.animateBuble()
@@ -63,22 +53,20 @@ class Visualizer extends React.Component {
 	}
 
 	animateBuble() {
-		$(this.container).find(".buble SPAN.new").each((i, span) => {
+		$(this.container).find('.buble SPAN.new').each((i, span) => {
 			setInterval(() => {
-				let $bubble = $(span).parent()
-				let bottom = parseFloat($bubble.css("bottom"))
-				$bubble.css("bottom", bottom + 1 + 'px')
-				if (bottom > this.height) {$bubble.remove()}
+				const $bubble = $(span).parent()
+				const bottom = parseFloat($bubble.css('bottom'))
+				$bubble.css('bottom', `${bottom + 1}px`)
+				if (bottom > this.height) { $bubble.remove() }
 			}, 10)
-			$(span).removeClass("new")
+			$(span).removeClass('new')
 		})
 	}
 
 	render() {
-
 		return (
-			<div style={style} ref={(container) => { this.container = container }}>
-			</div>
+			<div style={style} ref={(container) => { this.container = container }} />
 		)
 	}
 }
