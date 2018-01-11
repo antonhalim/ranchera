@@ -1,6 +1,13 @@
 import React from 'react'
 import Axios from 'axios'
 
+const style = {
+	bottom: 0,
+	position: 'absolute',
+	width: '100%',
+	textAlign: 'center',
+}
+
 function iframe(id) {
 	return (
 		<iframe
@@ -14,10 +21,11 @@ function iframe(id) {
 	)
 }
 
+
 class MusicPlayer extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { currentlyPlayingId: '' }
+		this.state = { currentlyPlayingObj: {}  }
 	}
 	componentWillReceiveProps(nextProps) {
 		const url = 'https://www.googleapis.com/youtube/v3/search'
@@ -27,24 +35,28 @@ class MusicPlayer extends React.Component {
 		if (nextProps.searchValue.length) {
 			Axios.get(`${url}?part=snippet&q=${val}&key=${key}&type=video&maxResults=1`)
 				.then((res) => {
-					this.setState({ currentlyPlayingId: res.data.items[0].id.videoId })
+					this.setState({ currentlyPlayingObj: res.data.items[0] })
 				})
 		}
 	}
 
 	render() {
 		let player = null
+		let title = null
+		const obj = this.state.currentlyPlayingObj
 
-		if (this.state.currentlyPlayingId.length) {
-			player = iframe(this.state.currentlyPlayingId)
+		if (Object.keys(obj).length) {
+			player = iframe(obj.id.videoId)
+			title = obj.snippet.title
 		}
 
 		if (this.props.searchValue.length < 1) {
 			player = null
 		}
 		return (
-			<footer>
+			<footer style={style}>
 				{ player }
+				<div>{title}</div>
 			</footer>
 		)
 	}

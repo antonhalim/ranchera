@@ -5,6 +5,7 @@ import 'font-awesome/scss/font-awesome.scss'
 
 import Header from '../components/header'
 import MusicPlayer from '../components/music-player'
+import Visualizer from '../components/visualizer'
 
 import '../../sass/style.scss'
 
@@ -34,6 +35,8 @@ class TemplateWrapper extends React.Component {
 				<Header handleSearch={this.handleSearch} />
 
 				<MusicPlayer searchValue={this.state.search} />
+
+				<Visualizer searching={this.state.search} />
 			</div>
 		)
 	}
