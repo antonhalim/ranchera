@@ -52,6 +52,7 @@ class MusicPlayer extends React.Component {
 
 		if (this.props.searchValue.length < 1) {
 			player = null
+			title = null
 		}
 		return (
 			<footer style={style}>
